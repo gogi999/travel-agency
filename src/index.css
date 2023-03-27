@@ -11,7 +11,7 @@
   }
   /* scroll-bar-code */
   .scroll-hidden::-webkit-scrollbar {
-    display: none !important;
+    display: none;
   }
   body::-webkit-scrollbar {
     scroll-behavior: smooth;

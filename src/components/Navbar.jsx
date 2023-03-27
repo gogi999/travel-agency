@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
 
 import { NavLink } from 'react-router-dom';
 
@@ -8,12 +11,29 @@ import PopupMenu from './PopupMenu';
 
 const Navbar = ({ navlinks }) => {
     const [popupState, setPopupState] = useState(false);
+    const [navState, setNavState] = useState(false);
 
     const onTriggerPopup = () => setPopupState(!popupState);
 
+    const onNavScroll = () => {
+        if (window.scrollY > 180) {
+            setNavState(true);
+        } else {
+            setNavState(false);
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', onNavScroll);
+
+        return () => {
+            window.removeEventListener('scroll', onNavScroll);
+        }
+    }, []);
+
     return (
         <>
-            <header className="flex items-center justify-center w-auto h-auto absolute top-7 left-0 right-0">
+            <header className={`nav-default ${navState && "nav-sticky"}`}>
                 <nav className="flex items-center justify-between travigo-container">
                     <NavLink 
                         to={`/`} 
